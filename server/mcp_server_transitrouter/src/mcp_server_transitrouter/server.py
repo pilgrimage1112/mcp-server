@@ -14,96 +14,6 @@ tr_resource = TRSDK()
 
 
 @mcp.tool(
-    name="describe_transit_routers",
-    description="查询满足指定条件的中转路由器实例"
-)
-def describe_transit_routers(
-        transit_router_ids: Optional[List[str]] = None,
-        transit_router_name: Optional[str] = None,
-        project_name: Optional[str] = None
-) -> dict[str, Any]:
-    """
-    调用 DescribeTransitRouters 接口，查询满足指定条件的中转路由器实例。
-    Args:
-        transit_router_ids Optional(List[str]): 中转路由器实例的ID列表。
-        transit_router_name Optional(str): 中转路由器实例的名称。
-        project_name Optional(List[str]): 中转路由器实例所属项目的名称列表。
-    Returns:
-        dict[str, Any]: 中转路由器实例的详细信息。
-    """
-    req = {
-        "transit_router_ids": transit_router_ids,
-        "transit_router_name": transit_router_name,
-        "project_name": project_name
-    }
-
-    resp = tr_resource.describe_transit_routers(req)
-    return resp.to_dict()
-
-@mcp.tool(
-    name="describe_transit_router_attachments",
-    description="查询满足指定条件的中转路由器实例"
-)
-def describe_transit_router_attachments(
-        transit_router_id: Optional[str] = None,
-        resource_type: Optional[str] = None,
-        resource_id: Optional[str] = None,
-        transit_router_forward_policy_table_id: Optional[str] = None,
-        transit_router_traffic_qos_marking_policy_id: Optional[str] = None,
-        transit_router_traffic_qos_queue_policy_id: Optional[str] = None,
-        transit_router_attachment_ids: Optional[List[str]] = None,
-) -> dict[str, Any]:
-    """
-    调用 DescribeTransitRouterAttachments 接口，查询实例共享列表。
-    Args:
-        transit_router_id Optional(str): 中转路由器实例的ID。
-        resource_type Optional(str): 资源类型。
-        resource_id Optional(str): 资源ID。
-        transit_router_forward_policy_table_id Optional(str): 路由策略表ID。
-        transit_router_traffic_qos_marking_policy_id Optional(str): 流量QoS标记策略ID。
-        transit_router_traffic_qos_queue_policy_id Optional(str): 流量QoS队列策略ID。
-        transit_router_attachment_ids Optional(List[str]): 实例共享关系ID列表。
-    Returns:
-        dict[str, Any]: 中转路由器实例的详细信息。
-    """
-    req = {
-        "transit_router_id": transit_router_id,
-        "resource_type": resource_type,
-        "resource_id": resource_id,
-        "transit_router_forward_policy_table_id": transit_router_forward_policy_table_id,
-        "transit_router_traffic_qos_marking_policy_id": transit_router_traffic_qos_marking_policy_id,
-        "transit_router_traffic_qos_queue_policy_id": transit_router_traffic_qos_queue_policy_id,
-        "transit_router_attachment_ids": transit_router_attachment_ids,
-    }
-
-    resp = tr_resource.describe_transit_router_attachments(req)
-    return resp.to_dict()
-
-@mcp.tool(
-    name="describe_transit_router_grant_rules",
-    description="查询满足指定条件的实例共享"
-)
-def describe_transit_router_grant_rules(
-        transit_router_id: str = None,
-        grant_account_id: Optional[str] = None
-) -> dict[str, Any]:
-    """
-    调用 DescribeTransitRouterGrantRules 接口，查询满足指定条件的实例共享。
-    Args:
-        transit_router_id (str, optional): 中转路由器实例的ID。
-        grant_account_id (str, optional): 共享账户的ID。
-    Returns:
-        dict[str, Any]: 实例共享的详细信息。
-    """
-    req = {
-        "transit_router_id": transit_router_id,
-        "grant_account_id": grant_account_id,
-    }
-
-    resp = tr_resource.describe_transit_router_grant_rules(req)
-    return resp.to_dict()
-
-@mcp.tool(
     name="describe_transit_router_vpc_attachments",
     description="查询满足指定条件的VPC类型网络实例连接"
 )
@@ -142,11 +52,11 @@ def describe_transit_router_vpn_attachments(
     """
     调用 describe_transit_router_vpn_attachments 接口，查询满足指定条件的VPN类型网络实例连接。
     Args:
-        transit_router_ids Optional(List[str]): 中转路由器实例的ID列表。
-        transit_router_name Optional(str): 中转路由器实例的名称。
-        project_name Optional(List[str]): 中转路由器实例所属项目的名称列表。
+        transit_router_id (str, optional): 中转路由器实例的ID。
+        transit_router_attachment_ids (list[str], optional): VPN类型网络实例连接的ID列表。
+        vpn_connection_id (str, optional): VPN连接的ID。
     Returns:
-        dict[str, Any]: 中转路由器实例的详细信息。
+        dict[str, Any]: VPN类型网络实例连接的详细信息。
     """
     req = {
         "transit_router_id": transit_router_id,
@@ -264,7 +174,6 @@ def describe_transit_router_bandwidth_packages_billing(
     description="查询满足指定条件的跨地域连接"
 )
 def describe_transit_router_peer_attachments(
-        transit_router_attachment_name: Optional[str] = None,
         transit_router_id: Optional[str] = None,
         transit_router_attachment_ids: Optional[List[str]] = None,
         peer_transit_router_id: Optional[str] = None,

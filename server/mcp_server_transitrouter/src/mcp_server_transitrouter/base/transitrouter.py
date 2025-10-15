@@ -3,10 +3,7 @@ import volcenginesdkcore
 from mcp_server_transitrouter.base.config import TR_CONFIG
 from volcenginesdktransitrouter.api.transitrouter_api import TRANSITROUTERApi
 
-from volcenginesdktransitrouter.models import DescribeTransitRoutersRequest, DescribeTransitRoutersResponse, \
-    DescribeTransitRouterAttachmentsRequest, DescribeTransitRouterAttachmentsResponse, \
-    DescribeTransitRouterGrantRulesRequest, DescribeTransitRouterGrantRulesResponse, \
-    DescribeTransitRouterVpcAttachmentsRequest, DescribeTransitRouterVpcAttachmentsResponse, \
+from volcenginesdktransitrouter.models import DescribeTransitRouterVpcAttachmentsRequest, DescribeTransitRouterVpcAttachmentsResponse, \
     DescribeTransitRouterVpnAttachmentsRequest, DescribeTransitRouterVpnAttachmentsResponse, \
     DescribeTransitRouterDirectConnectGatewayAttachmentsRequest, DescribeTransitRouterDirectConnectGatewayAttachmentsResponse, \
     DescribeTransitRouterBandwidthPackagesRequest, DescribeTransitRouterBandwidthPackagesResponse, \
@@ -38,15 +35,6 @@ class TRSDK:
         if TR_CONFIG.host is not None:
             configuration.host = TR_CONFIG.host
         self.client = TRANSITROUTERApi(volcenginesdkcore.ApiClient(configuration))
-
-    def describe_transit_routers(self, args: dict) -> DescribeTransitRoutersResponse:
-        return self.client.describe_transit_routers(DescribeTransitRoutersRequest(**args))
-
-    def describe_transit_router_attachments(self, args: dict) -> DescribeTransitRouterAttachmentsResponse:
-        return self.client.describe_transit_router_attachments(DescribeTransitRouterAttachmentsRequest(**args))
-
-    def describe_transit_router_grant_rules(self, args: dict) -> DescribeTransitRouterGrantRulesResponse:
-        return self.client.describe_transit_router_grant_rules(DescribeTransitRouterGrantRulesRequest(**args))
 
     def describe_transit_router_vpc_attachments(self, args: dict) -> DescribeTransitRouterVpcAttachmentsResponse:
         return self.client.describe_transit_router_vpc_attachments(DescribeTransitRouterVpcAttachmentsRequest(**args))
